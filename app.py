@@ -673,6 +673,10 @@ with tab_dl:
     st.plotly_chart(dl_figure_layout(fig_dl), width="stretch")
     st.caption("MC Dropout bands describe the surrogate's model uncertainty; parametric uncertainty of the soil is "
                "propagated in the 'Validación vs MC' tab. Physical oracle and surrogate share the same forcing and regime.")
+    if dl_rain == DL_RAIN_OPTIONS[0]:
+        st.caption("Before the failure the oracle is essentially the v1.0 linear law (identical with forcing off): FS < 1 "
+                   "between 2018.9 and 2021.0 is an inherited conservative bias, not a failure prediction. The failure date "
+                   "t_f is an input; the 2021 minimum (0.906) is calibrated, the 2024 minimum (1.062 > 1) is not.")
 
     if dl_metrics.get("models", {}).get("lstm"):
         tst = dl_metrics["models"]["lstm"]["test"]

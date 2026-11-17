@@ -1,7 +1,8 @@
 # AGD-Sentinel 2.0: surrogate profundo guiado por la física para la estabilidad temporal de taludes
 
 AGD-Sentinel es un marco abierto para proyectar en el tiempo el Factor de Seguridad (FS) de taludes
-infinitos sometidos a degradación geotécnica (régimen AGD: deterioro, falla y recuperación parcial).
+infinitos sometidos a AGD, *Deterioro Geotécnico Acumulado* (régimen de deterioro, falla y recuperación
+parcial).
 La versión 1.0 combinó equilibrio límite pseudo-estático (LEM), leyes lineales de degradación de
 c' y φ', propagación Monte Carlo y regresión polinomial. **La versión 2.0 añade un surrogate de
 aprendizaje profundo (LSTM secuencia a secuencia) entrenado sobre un oráculo físico calibrado con
@@ -279,8 +280,13 @@ Estados de celda C_t frente a variables físicas y compuerta de olvido frente a 
   eligió el modelo mirando Cortinas para evitar fuga de información. La GRU alcanza 0.027 en esa misma
   trayectoria.
 - **Speedup.** Frente al oráculo analítico vectorizado, el LSTM en lote es más lento (apartado 4.3).
-- **Fechado y horizonte.** t_f = 2021.0 por el fechado anual de la v1.0 (la falla real fue en agosto de
-  2021). Toda proyección posterior a 2025 es extrapolación del modelo.
+- **FS < 1 antes de la falla.** Antes de la falla el oráculo es, en esencia, la ley lineal de la v1.0
+  (talud infinito, z = 13 m; idéntica con el forzante apagado): cruza FS = 1.1 a finales de 2017 y 1.0
+  hacia 2018.9, y llega a ≈ 0.79 en 2021.0, aunque el talud real falló en agosto de 2021. Es un sesgo
+  conservador heredado (α y δ salen de la campaña posfalla de 2021; talud infinito frente a Spencer 2D),
+  no una predicción de falla en 2018.9. La fecha de falla t_f = 2021.0 es un dato de entrada; el mínimo
+  0.906 está calibrado y lo no calibrado es el mínimo de 2024 = 1.062 > 1.
+- **Horizonte.** Toda proyección posterior a 2025 es extrapolación del modelo.
 - **Detalles de implementación.** En la pestaña de validación el régimen de recuperación se aplica a todas
   las muestras (sin revertir por muestra cuando FS(t_f⁻) ≥ 1); γ del Monte Carlo se recorta a
   [18.5, 21] kN/m³ (rango de entrenamiento); los controles de la aplicación están acotados al rango de
