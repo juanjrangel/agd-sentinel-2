@@ -1,0 +1,4 @@
+# Training/re-evaluation of the deep surrogates (dl_train_evaluate.py). Not needed to run the app.
+# CPU build: pip install torch --index-url https://download.pytorch.org/whl/cpu
+-r requirements.txt
+torch>=2.2
