@@ -434,7 +434,7 @@ with tab_v1:
         st.subheader("Probability Distribution")
         fig = px.histogram(x=fs_sims, nbins=40, color_discrete_sequence=['#636EFA'])
         fig.add_vline(x=1.1, line_dash="dash", line_color="red")
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white',
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white', legend_font_color='#E2E8F0',
                           xaxis_title="Factor of Safety", yaxis_title="Frequency")
         st.plotly_chart(fig, width="stretch")
 
@@ -483,7 +483,7 @@ with tab_v1:
                 fig_ml.add_trace(go.Scatter(x=[2026], y=[fs_actual], mode='markers', marker_symbol='star', marker_size=15, name='Current'))
                 fig_ml.add_trace(go.Scatter(x=years_fut.flatten(), y=fs_fut, mode='lines', name='AI Trend'))
                 fig_ml.add_hline(y=1.1, line_color="red", line_dash="dash")
-                fig_ml.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white',
+                fig_ml.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white', legend_font_color='#E2E8F0',
                                     xaxis_title="Year", yaxis_title="Factor of Safety", height=450)
                 st.plotly_chart(fig_ml, width="stretch")
             
@@ -541,7 +541,7 @@ def dl_kpi_card(label, value, caption):
 
 
 def dl_figure_layout(fig, height=480):
-    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white',
+    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white', legend_font_color='#E2E8F0',
                       xaxis_title="Year", yaxis_title="Factor of Safety FS(t)", height=height,
                       legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0), hovermode="x unified")
     fig.add_hline(y=dlg.FS_CRIT, line_color=DL_COLORS["crit"], line_dash="dash",
@@ -739,7 +739,7 @@ with tab_mc:
             fig_tc = go.Figure()
             fig_tc.add_trace(go.Histogram(x=dlg.YEAR0 + res["tc_or"], name="Classic MC (oracle)", marker_color=DL_COLORS["mc_line"], opacity=0.6, nbinsx=40))
             fig_tc.add_trace(go.Histogram(x=dlg.YEAR0 + res["tc_sur"], name="LSTM batch MC", marker_color=DL_COLORS["lstm"], opacity=0.6, nbinsx=40))
-            fig_tc.update_layout(barmode="overlay", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white',
+            fig_tc.update_layout(barmode="overlay", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white', legend_font_color='#E2E8F0',
                                  xaxis_title="Year of first crossing FS = 1.1", yaxis_title="Frequency", height=320)
             st.plotly_chart(fig_tc, width="stretch")
             pc_or, pc_sur = np.percentile(res["tc_or"], [5, 50, 95]), np.percentile(res["tc_sur"], [5, 50, 95])

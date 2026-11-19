@@ -5,3 +5,7 @@ __pycache__/
 # datos sinteticos regenerables y registros
 data/
 logs/
+# credenciales locales: nunca versionar
+.env
+.env.*
+*.env
